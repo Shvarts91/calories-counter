@@ -1,0 +1,24 @@
+.radioBlock input[type='radio'] {
+  display: none;
+}
+
+.radioBlock label {
+  display: inline-block;
+  padding: 2px 9px;
+  cursor: pointer;
+  border: 1px solid #dad0ff;
+}
+
+.radioBlock input:checked + label {
+  background-color: #ff9900;
+  border: 1px solid #ff9900;
+}
+.radioBlock label:hover {
+  border: 1px solid #ff9900;
+}
+
+.radioBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

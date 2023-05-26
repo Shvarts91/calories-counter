@@ -1,5 +1,5 @@
 import './App.css'
-import FormFinalGroup from './component/FormFinalGroup'
+import FormFinalGroup from './components/FormFinalGroup'
 
 function App() {
   return (
