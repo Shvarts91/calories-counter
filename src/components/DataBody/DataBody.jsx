@@ -1,6 +1,5 @@
 function DataBody({ inputName, titleName, value, onChange }) {
   const handleChange = (e) => {
-    console.log(e.value)
     onChange({ value: e.target.value, name: e.target.name })
   }
 

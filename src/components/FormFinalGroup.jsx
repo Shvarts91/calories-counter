@@ -1,62 +1,61 @@
 import Gender from './Gender/Gender'
 import React, { useState } from 'react'
 import DataBody from './DataBody/DataBody'
-import Activity from './Activity/Activity'
+import Activities from './Activities/Activities'
+
+const TypesOfActivities = {
+  minimal: 1.2,
+  low: 1.375,
+  medium: 1.55,
+  high: 1.725,
+  veryHigh: 1.9,
+}
 
 const FormFinalGroup = () => {
-  const initialValue = {
+  const initialValueFields = {
     gender: 'male',
     age: '',
     growth: '',
     weight: '',
     activity: 'minimal',
-    resultCalories: '',
   }
-  const [valueFields, setValueFields] = useState(initialValue)
+
+  const [resultCallories, setResultCallories] = useState(null)
+
+  const [valueFields, setValueFields] = useState(initialValueFields)
+
   const onChange = ({ name, value }) => {
     setValueFields({ ...valueFields, [name]: value })
   }
 
   const clearValueForm = (e) => {
     e.preventDefault()
-    setValueFields(initialValue)
+    setValueFields(initialValueFields)
   }
 
-  const activities = {
-    minimal: 1.2,
-    low: 1.375,
-    medium: 1.55,
-    high: 1.725,
-    veryHigh: 1.9,
-  }
-
-  const calculationCalories = ({ gender, activity }) => {
-    let sum =
-      10 * valueFields.weight + 6.25 * valueFields.growth - 5 * valueFields.age
+  const calculationCalories = ({ gender, activity, weight, growth, age }) => {
+    let sum = 10 * weight + 6.25 * growth - 5 * age
     if (gender === 'male') sum = sum + 5
     if (gender === 'female') sum = sum - 161
 
-    const coefficient = activities[activity]
+    const coefficient = TypesOfActivities[activity]
     const result = sum * coefficient
 
-    setValueFields({ ...valueFields, resultCalories: result })
+    return { result, ...getPercent(result) }
   }
 
   const getResultСalculations = (e) => {
     e.preventDefault()
-    calculationCalories(valueFields)
+    setResultCallories(calculationCalories(valueFields))
   }
 
-  const getPercent = (value) => {
-    const num = valueFields.resultCalories
+  const getPercent = (resultCallories) => {
     const tallage = 15
-    const result = (num / 100) * tallage
-    if (value === 'plus') {
-      return num + result
-    }
-    if (value === 'minus') {
-      return num - result
-    }
+    const result = (resultCallories / 100) * tallage
+    const gainWeigh = resultCallories + result
+    const lossWidth = resultCallories - result
+
+    return { gainWeigh, lossWidth }
   }
 
   return (
@@ -82,7 +81,7 @@ const FormFinalGroup = () => {
           value={valueFields.weight}
         />
       </div>
-      <Activity onChange={onChange} value={valueFields.activity} />
+      <Activities onChange={onChange} value={valueFields.activity} />
       <div>
         <button
           disabled={
@@ -102,23 +101,21 @@ const FormFinalGroup = () => {
           Очистить поля и расчет
         </button>
       </div>
-      {valueFields.resultCalories ? (
+      {resultCallories && (
         <div className="resultBlock">
           <div>
-            <h2>{valueFields.resultCalories}</h2>
+            <h2>{resultCallories.result}</h2>
             <p>Ваша норма</p>
           </div>
           <div>
-            <h2>{getPercent('minus')}</h2>
+            <h2>{resultCallories.lossWidth}</h2>
             <p>Снижение веса</p>
           </div>
           <div>
-            <h2>{getPercent('plus')}</h2>
+            <h2>{resultCallories.gainWeigh}</h2>
             <p>Набор веса</p>
           </div>
         </div>
-      ) : (
-        ''
       )}
     </form>
   )
