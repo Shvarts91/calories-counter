@@ -1,19 +1,68 @@
 .App {
+  position: relative;
   text-align: center;
-  background-color: #fff;
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  background: url('../assets/bg-project .jpg') center center no-repeat;
+  filter: blur(4.5px);
+  background-size: 100% 100%;
+  z-index: -1;
+}
+
+h1 {
+  margin: 0 auto;
+  padding: 20px 0;
+}
+h2 {
+  text-align: left;
+}
+
+.finalForm {
+  padding: 20px;
+  background-color: #fff;
+  max-width: 375px;
+  margin: 0 auto 15px;
+  border-radius: 20px;
+}
+.dataBodyGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonBlock {
+  display: flex;
+  justify-content: space-between;
+}
+.resultBlock {
+  padding: 20px;
+  background-color: #fff;
+  max-width: 375px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+.finalValueBlock {
+  display: flex;
+  justify-content: space-between;
+}
+.resultBlock h2 {
+  color: #ff6f00;
+}
+.resultBlock h3 {
+  margin: 0;
+  text-align: left;
+}
+.resultBlock p {
+  margin-top: 5px;
+  text-align: left;
+  font-size: 14px;
+  opacity: 0.6;
 }

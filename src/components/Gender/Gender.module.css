@@ -10,15 +10,26 @@
 }
 
 .radioBlock input:checked + label {
-  background-color: #ff9900;
-  border: 1px solid #ff9900;
+  background-color: #ff6f00;
+  border: 1px solid #ff6f00;
+  color: #fff;
 }
 .radioBlock label:hover {
-  border: 1px solid #ff9900;
+  border: 1px solid #ff6f00;
 }
 
 .radioBlock {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2px;
+}
+
+.radioBlockElement {
+  flex: 0 1 50%;
+}
+
+.radioBlockElement label {
+  width: 100%;
+  padding: 5px 0;
 }

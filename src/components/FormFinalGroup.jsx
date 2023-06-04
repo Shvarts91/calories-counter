@@ -2,6 +2,8 @@ import Gender from './Gender/Gender'
 import React, { useState } from 'react'
 import DataBody from './DataBody/DataBody'
 import Activities from './Activities/Activities'
+import Button from '@mui/material/Button'
+import CloseIcon from '@mui/icons-material/Close'
 
 const TypesOfActivities = {
   minimal: 1.2,
@@ -31,6 +33,7 @@ const FormFinalGroup = () => {
   const clearValueForm = (e) => {
     e.preventDefault()
     setValueFields(initialValueFields)
+    setResultCallories(null)
   }
 
   const calculationCalories = ({ gender, activity, weight, growth, age }) => {
@@ -39,7 +42,7 @@ const FormFinalGroup = () => {
     if (gender === 'female') sum = sum - 161
 
     const coefficient = TypesOfActivities[activity]
-    const result = sum * coefficient
+    const result = Math.round(sum * coefficient)
 
     return { result, ...getPercent(result) }
   }
@@ -52,72 +55,92 @@ const FormFinalGroup = () => {
   const getPercent = (resultCallories) => {
     const tallage = 15
     const result = (resultCallories / 100) * tallage
-    const gainWeigh = resultCallories + result
-    const lossWidth = resultCallories - result
+    const gainWeigh = Math.round(resultCallories + result)
+    const lossWidth = Math.round(resultCallories - result)
 
     return { gainWeigh, lossWidth }
   }
 
   return (
-    <form onSubmit={getResultСalculations}>
-      <Gender onChange={onChange} value={valueFields.gender} />
-      <div>
-        <DataBody
-          titleName="Возраст"
-          inputName="age"
-          onChange={onChange}
-          value={valueFields.age}
-        />
-        <DataBody
-          titleName="Pocт"
-          inputName="growth"
-          onChange={onChange}
-          value={valueFields.growth}
-        />
-        <DataBody
-          titleName="Вес"
-          inputName="weight"
-          onChange={onChange}
-          value={valueFields.weight}
-        />
-      </div>
-      <Activities onChange={onChange} value={valueFields.activity} />
-      <div>
-        <button
-          disabled={
-            !+valueFields.age || !+valueFields.growth || !+valueFields.weight
-          }
-          type="submit"
-        >
-          Расчитать
-        </button>
-        <button
-          disabled={
-            !+valueFields.age && !+valueFields.growth && !+valueFields.weight
-          }
-          type="reset"
-          onClick={clearValueForm}
-        >
-          Очистить поля и расчет
-        </button>
-      </div>
+    <div>
+      <h1>Счетчик каллорий</h1>
+      <form onSubmit={getResultСalculations} className="finalForm">
+        <Gender onChange={onChange} value={valueFields.gender} />
+        <div className="dataBodyGroup">
+          <DataBody
+            titleName="Возраст"
+            inputName="age"
+            onChange={onChange}
+            value={valueFields.age}
+            text="лет"
+            nameClass="age"
+          />
+          <DataBody
+            titleName="Pocт"
+            inputName="growth"
+            onChange={onChange}
+            value={valueFields.growth}
+            text="см"
+            nameClass="growth"
+          />
+          <DataBody
+            titleName="Вес"
+            inputName="weight"
+            onChange={onChange}
+            value={valueFields.weight}
+            text="кг"
+            nameClass="weight"
+          />
+        </div>
+        <Activities onChange={onChange} value={valueFields.activity} />
+        <div className="buttonBlock">
+          <Button
+            disabled={
+              !+valueFields.age || !+valueFields.growth || !+valueFields.weight
+            }
+            type="submit"
+            variant="contained"
+            sx={{
+              color: 'white',
+            }}
+          >
+            Расчитать
+          </Button>
+
+          <Button
+            disabled={
+              !+valueFields.age && !+valueFields.growth && !+valueFields.weight
+            }
+            type="reset"
+            onClick={clearValueForm}
+            color="error"
+            variant="text"
+            startIcon={<CloseIcon />}
+          >
+            Очистить поля и расчет
+          </Button>
+        </div>
+      </form>
       {resultCallories && (
         <div className="resultBlock">
-          <div>
-            <h2>{resultCallories.result}</h2>
-            <p>Ваша норма</p>
-          </div>
-          <div>
-            <h2>{resultCallories.lossWidth}</h2>
-            <p>Снижение веса</p>
-          </div>
-          <div>
-            <h2>{resultCallories.gainWeigh}</h2>
-            <p>Набор веса</p>
+          <h2>Ваша норма каллорий</h2>
+          <div className="finalValueBlock">
+            <div>
+              <h3>{resultCallories.result + ' ккал'}</h3>
+              <p>Поддержание веса</p>
+            </div>
+            <div>
+              <h3>{resultCallories.lossWidth + ' ккал'}</h3>
+              <p>Снижение веса</p>
+            </div>
+            <div>
+              <h3>{resultCallories.gainWeigh + ' ккал'}</h3>
+              <p>Набор веса</p>
+            </div>
           </div>
         </div>
       )}
-    </form>
+    </div>
   )
 }
 
