@@ -20,14 +20,15 @@
 
 h1 {
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 15px 0;
 }
 h2 {
   text-align: left;
+  margin: 12px 0;
 }
 
 .finalForm {
-  padding: 20px;
+  padding: 10px 20px;
   background-color: #fff;
   max-width: 375px;
   margin: 0 auto 15px;
@@ -43,7 +44,7 @@ h2 {
   justify-content: space-between;
 }
 .resultBlock {
-  padding: 20px;
+  padding: 10px 20px;
   background-color: #fff;
   max-width: 375px;
   margin: 0 auto;

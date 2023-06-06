@@ -7,24 +7,27 @@ function DataBody({ inputName, titleName, value, onChange, text, nameClass }) {
     onChange({ value: e.target.value, name: e.target.name })
   }
 
+  const inputProps = {
+    title: 'Please enter a positive integer (excluding zero)',
+    pattern: '[1-9][0-9]*',
+  }
+
   return (
     <div className={s[cssClass]}>
       <h2>
         {titleName} <span className={s.textDataBody}>{text}</span>
       </h2>
-      <label htmlFor={inputName}></label>
+
       <TextField
         name={inputName}
         id={inputName}
-        // label={inputName}
         min={0}
         variant="outlined"
         value={value}
         onChange={handleChange}
         placeholder={0}
         type="text"
-        pattern="[1-9][0-9]*"
-        title="Please enter a positive integer (excluding zero)"
+        inputProps={inputProps}
       />
     </div>
   )
