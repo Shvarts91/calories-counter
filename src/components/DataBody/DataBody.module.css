@@ -1,0 +1,51 @@
+.age {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  align-items: flex-start;
+}
+.age input {
+  width: 40px;
+  padding: 5px;
+  text-align: center;
+}
+
+.growth {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  align-items: center;
+}
+.growth input {
+  width: 40px;
+  padding: 5px;
+  text-align: center;
+}
+
+.weight {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  align-items: flex-end;
+}
+.weight input {
+  width: 40px;
+  padding: 5px;
+  text-align: center;
+}
+
+.dataBodyElement input {
+  max-width: 40px;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #000;
+}
+
+.dataBodyElement input:focus {
+  border-color: #ff6f00;
+}
+.textDataBody {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.6;
+}

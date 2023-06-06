@@ -1,11 +1,15 @@
 import './App.css'
-import FormFinalGroup from './component/FormFinalGroup'
+import FormFinalGroup from './components/FormFinalGroup'
+import { ThemeProvider } from '@mui/material/styles'
+import theme from './theme'
 
 function App() {
   return (
-    <div className="App">
-      <FormFinalGroup />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <FormFinalGroup />
+      </div>
+    </ThemeProvider>
   )
 }
 

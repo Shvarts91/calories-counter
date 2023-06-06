@@ -1,0 +1,20 @@
+.activityElement {
+  text-align-last: left;
+  margin-bottom: 10px;
+}
+.activityElement label:hover {
+  cursor: pointer;
+  color: #ff6f00;
+  transition: all ease 0.5s;
+}
+
+.activityElementSpan {
+  display: block;
+  padding: 0 0 0 20px;
+  font-size: 14px;
+  opacity: 0.6;
+  color: #000;
+}
+.activityElement input:checked + label {
+  color: #ff6f00;
+}
